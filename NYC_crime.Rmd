@@ -1,0 +1,72 @@
+---
+title: "NYC Crime Analysis"
+author: "Malcolm Hess"
+date: "Wednesday, September 09, 2015"
+output: html_document
+---
+
+The purpose of this project is to look at crime in NYC and determine if there is a significant change, either decrease or increase in the amount of crime that takes place in the city of New York.  
+
+Crime data was collected from the FBI and aggregated into a total crime statistic.  The original crime breakdown included Murder, Rape, Robberies, Assaults, Burglaries, Theft, and Auto Theft.  The data was taken from an aggregated source here :http://www.city-data.com/crime/crime-New-York-New-York.html: but with original sourcing at the FBI site https://www.fbi.gov/stats-services/crimestats
+
+Population was found through Google's open data software which has orignal sourcing at the US Census Bureau.
+
+
+First steps are loading the data in.  
+```{r}
+
+
+setwd("E:/")
+nyccrime <- read.csv("NYC_Crime.csv")
+nyccrime <- nyccrime[8:9,]
+
+```
+
+I did individual prop tests to check and see if the changes in crime were significant or not.  I normally would have run this through a while loop instead of individually coded as it appears below however R does not print out the summary of these proportion tests when they are done in a while loop.  The code will compare sequential years to see if there is a significant change in the amount of crime. 
+
+The proportion test will test wether or not the proportion of crimes to population between two years is significantly different or not (two sided).  The Null hypothesis is that the proportion of crimes to population between two years is the same.
+
+
+```{r, echo=TRUE}
+
+i <- 2
+
+
+prop.test(c(nyccrime[1,i], nyccrime[1,(i+1)]), c(nyccrime[2,i], nyccrime[2,(i+1)]))
+i <- i + 1
+
+prop.test(c(nyccrime[1,i], nyccrime[1,(i+1)]), c(nyccrime[2,i], nyccrime[2,(i+1)]))
+i <- i + 1
+
+prop.test(c(nyccrime[1,i], nyccrime[1,(i+1)]), c(nyccrime[2,i], nyccrime[2,(i+1)]))
+i <- i + 1
+
+prop.test(c(nyccrime[1,i], nyccrime[1,(i+1)]), c(nyccrime[2,i], nyccrime[2,(i+1)]))
+i <- i + 1
+
+prop.test(c(nyccrime[1,i], nyccrime[1,(i+1)]), c(nyccrime[2,i], nyccrime[2,(i+1)]))
+i <- i + 1
+
+prop.test(c(nyccrime[1,i], nyccrime[1,(i+1)]), c(nyccrime[2,i], nyccrime[2,(i+1)]))
+i <- i + 1
+
+prop.test(c(nyccrime[1,i], nyccrime[1,(i+1)]), c(nyccrime[2,i], nyccrime[2,(i+1)]))
+i <- i + 1
+
+prop.test(c(nyccrime[1,i], nyccrime[1,(i+1)]), c(nyccrime[2,i], nyccrime[2,(i+1)]))
+i <- i + 1
+
+prop.test(c(nyccrime[1,i], nyccrime[1,(i+1)]), c(nyccrime[2,i], nyccrime[2,(i+1)]))
+i <- i + 1
+
+prop.test(c(nyccrime[1,i], nyccrime[1,(i+1)]), c(nyccrime[2,i], nyccrime[2,(i+1)]))
+i <- i + 1
+
+prop.test(c(nyccrime[1,i], nyccrime[1,(i+1)]), c(nyccrime[2,i], nyccrime[2,(i+1)]))
+i <- i + 1
+
+prop.test(c(nyccrime[1,i], nyccrime[1,(i+1)]), c(nyccrime[2,i], nyccrime[2,(i+1)]))
+```
+
+As you can see that every one of the proportion tests has come out significant.  Which means we can reject the null hypothesis that the proportion of crimes to population between any two sequential years are the same and accept the alternate hypothesis that every year since 2001 has seen a significant change in crime.  This includes three years 2010, 2011 and 2012 that saw a significant increase in crime per population rate
+
